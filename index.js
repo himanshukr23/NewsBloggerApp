@@ -7,6 +7,7 @@ require('dotenv').config();
 // ! requires
 const isBlogExist = require('./middelware/blogExist');
 const adminRouter = require('./routes/admin.route');
+const userRouter = require('./routes/user.route');
 
 // ! Root Route
 app.get('/', (req, res) => {
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 //!Trigger or Global mount 
 app.use(isBlogExist.isBlogExistOrNot);
 app.use('/', adminRouter);
+app.use('/', userRouter);
 
 //!Mongoose connection  
 const database_Url = process.env.DATABASE_URL;

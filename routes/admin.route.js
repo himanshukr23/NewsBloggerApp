@@ -30,9 +30,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-adminRouter.post('/blog-setup', upload.single('blog_image'), adminController.blogSetup)
+adminRouter.post('/blog-setup', upload.single('blog_logo'), adminController.blogSetupSave);
 adminRouter.get('/blog-setup', adminController.blogSetup);
-
 adminRouter.get('/');
+
+adminRouter.get('/dashboard', adminController.dashboard);
 
 module.exports = adminRouter;

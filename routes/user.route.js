@@ -1,0 +1,31 @@
+const express = require('express');
+const userRouter = express();
+require('dotenv').config();
+const userController = require('../controller/user.controller');
+const session = require('express-session');
+
+
+const bodyParser = require('body-parser');
+userRouter.use(bodyParser.json());
+userRouter.use(bodyParser.urlencoded({ extended: true }));
+
+userRouter.set('view engine', 'ejs');
+userRouter.set('views', './views');
+const sessionSecretKey = process.env.SESSION_SECRET_KEY;
+
+userRouter.use(session({
+    secret: sessionSecretKey,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+}))
+userRouter.use(express.static('public'));
+userRouter.get('/login', userController.loginLoader);
+
+userRouter.post('/login', userController.verifyLogin);
+
+userRouter.get('/profile', userController.profile);
+
+
+
+module.exports = userRouter

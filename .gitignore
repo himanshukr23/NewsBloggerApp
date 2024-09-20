@@ -129,6 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# my project ignore file
+#! my project ignore file and folders
 /package.json
 /package-lock.json
+/public/images
