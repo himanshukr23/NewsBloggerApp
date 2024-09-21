@@ -3,9 +3,10 @@ const userRouter = express();
 require('dotenv').config();
 const userController = require('../controller/user.controller');
 const session = require('express-session');
-
-
+const adminLoginAuth = require('../middelware/adminLoginAuth');
 const bodyParser = require('body-parser');
+
+
 userRouter.use(bodyParser.json());
 userRouter.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,7 +21,7 @@ userRouter.use(session({
     cookie: { secure: true },
 }))
 userRouter.use(express.static('public'));
-userRouter.get('/login', userController.loginLoader);
+userRouter.get('/login', adminLoginAuth.isLogout, userController.loginLoader);
 
 userRouter.post('/login', userController.verifyLogin);
 
