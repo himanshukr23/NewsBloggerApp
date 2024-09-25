@@ -24,6 +24,7 @@ userRouter.use(express.static('public'));
 userRouter.get('/login', adminLoginAuth.isLogout, userController.loginLoader);
 
 userRouter.post('/login', userController.verifyLogin);
+userRouter.get('/logout', adminLoginAuth.isLogin, userController.logout);
 
 userRouter.get('/profile', userController.profile);
 

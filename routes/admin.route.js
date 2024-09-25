@@ -36,5 +36,7 @@ adminRouter.get('/blog-setup', adminController.blogSetup);
 adminRouter.get('/');
 
 adminRouter.get('/dashboard', adminLoginAuth.isLogin, adminController.dashboard);
+adminRouter.get('/create-post', adminLoginAuth.isLogin, adminController.loadPostDashboard);
+adminRouter.post('/create-post', adminLoginAuth.isLogin, adminController.addPost);
 
 module.exports = adminRouter;

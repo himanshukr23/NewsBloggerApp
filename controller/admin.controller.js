@@ -1,6 +1,7 @@
 const blogSchema = require('../model/blog.schema');
 const user = require('../model/user.schema');
 const bcrypt = require('bcrypt');
+const Post = require('../model/post.schema');
 
 
 const securePassword = async (password) => {
@@ -76,8 +77,34 @@ const dashboard = (req, res) => {
     }
 }
 
+
+const loadPostDashboard = async (req, res) => {
+    try {
+        res.render('admin/postDashboard');
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const addPost = async (req, res) => {
+    try {
+        const newPost = new Post({
+            title: req.body.title,
+            content: req.body.content,
+        });
+
+        const postData = await newPost.save();
+
+        res.render('admin/postDashboard', { message: "Post Added Successfully" })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     blogSetup,
     blogSetupSave,
     dashboard,
+    loadPostDashboard,
+    addPost,
 }
