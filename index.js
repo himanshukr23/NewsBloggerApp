@@ -9,6 +9,21 @@ const isBlogExist = require('./middelware/blogExist');
 const adminRouter = require('./routes/admin.route');
 const userRouter = require('./routes/user.route');
 
+// !Temporary
+// const bodyParser = require('body-parser');
+const session = require('express-session');
+const sessionSecretKey = process.env.SESSION_SECRET_KEY;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: sessionSecretKey,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+}))
+
 // ! Root Route
 app.get('/', (req, res) => {
     res.send("This is NewsBlogger project");

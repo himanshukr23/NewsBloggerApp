@@ -1,6 +1,7 @@
 const express = require('express');
 const adminRouter = express();
 const adminController = require('../controller/admin.controller');
+const adminLoginAuth = require('../middelware/adminLoginAuth');
 
 const multer = require('multer');
 const path = require('path');
@@ -34,6 +35,6 @@ adminRouter.post('/blog-setup', upload.single('blog_logo'), adminController.blog
 adminRouter.get('/blog-setup', adminController.blogSetup);
 adminRouter.get('/');
 
-adminRouter.get('/dashboard', adminController.dashboard);
+adminRouter.get('/dashboard', adminLoginAuth.isLogin, adminController.dashboard);
 
 module.exports = adminRouter;
