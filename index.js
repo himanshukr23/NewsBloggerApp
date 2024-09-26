@@ -8,6 +8,7 @@ require('dotenv').config();
 const isBlogExist = require('./middelware/blogExist');
 const adminRouter = require('./routes/admin.route');
 const userRouter = require('./routes/user.route');
+const blogRouter = require('./routes/blog.route');
 
 // !Temporary
 // const bodyParser = require('body-parser');
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 app.use(isBlogExist.isBlogExistOrNot);
 app.use('/', adminRouter);
 app.use('/', userRouter);
+app.use('/', blogRouter)
 
 //!Mongoose connection  
 const database_Url = process.env.DATABASE_URL;
