@@ -1,4 +1,4 @@
-<%- include('./layouts/header.ejs')%>
+<%- include('./layouts/header.ejs') %>
     <!-- Page content-->
     <div class="container mt-5">
         <div class="row">
@@ -12,20 +12,28 @@
                             <%= post.title %>
                         </h1>
                         <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">By newzBlogger Admin</div>
+                        <div class="text-muted fst-italic mb-2">By newzBlogger Admin {Himanshu}</div>
                         <!-- Post categories-->
-                        <!-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> -->
+                        <!-- <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>  
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a> -->
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded"
-                            src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
-                    <!-- Post content-->
-                    <section class="mb-5">
-                        <p class="fs-5 mb-4">
-                            <%= post.content %>
-                        </p>
-                    </section>
+                    <figure class="mb-4">
+                        <% if(post.image !==undefined && post.image !=='' ){ %>
+                            <img class="img-fluid rounded" src="<%=post.image%>" alt="..." />
+                    </figure>
+
+                    <% }else{ %>
+                        <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+                            alt="..." /></figure>
+                        <% } %>
+                            <!-- <img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure> -->
+                            <!-- Post content-->
+                            <section class="mb-5">
+                                <p class="fs-5 mb-4">
+                                    <%= post.content %>
+                                </p>
+                            </section>
                 </article>
                 <!-- Comments section-->
                 <section class="mb-5">
@@ -43,23 +51,9 @@
                             </form>
                             <p class="com-status" style="color: green;"></p>
                             <!-- Comment with nested comments-->
-                            <% if(post.comments.length>=0){
-                                post.comments = post.comments.reverse();
-                                post.comments.forEach(function(comment){
-                                %>
-                                <div class="d-flex mt-3">
-                                    <div class="flex-shrink-0"><img class="rounded-circle"
-                                            src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">
-                                            <%=comment.username%>
-                                        </div>
-                                        <%=comment.comment%>
-                                    </div>
-                                </div>
 
-                                <% }); } %>
-                                    <!-- Single comment-->
+                            <!-- Single comment-->
+
                         </div>
                     </div>
                 </section>
@@ -80,27 +74,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('#comment-form').submit(function (event) {
-                event.preventDefault();
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    url: "/add-comment",
-                    type: "POST",
-                    data: formData,
-                    success: function (data) {
-                        console.log(data);
-                        $('.com-status').text(data.msg);
-                        setTimeout(function () {
-                            $('.com-status').text('');
-                        }, 5000);
-                    }
-
-                })
-            })
-        })
-    </script>
-
-    <%- include('./layouts/footer.ejs')%>
+    <%- include('./layouts/footer.ejs') %>

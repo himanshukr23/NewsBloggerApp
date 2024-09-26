@@ -2,7 +2,7 @@ const express = require('express');
 const blogRoutes = express();
 
 blogRoutes.set('view engine', 'ejs');
-blogRoutes.set('views', './view');
+blogRoutes.set('views', './views');
 
 blogRoutes.use(express.static('public'));
 

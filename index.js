@@ -25,10 +25,6 @@ app.use(session({
     cookie: { secure: false },
 }))
 
-// ! Root Route
-app.get('/', (req, res) => {
-    res.send("This is NewsBlogger project");
-});
 
 //!Trigger or Global mount 
 app.use(isBlogExist.isBlogExistOrNot);
@@ -36,6 +32,10 @@ app.use('/', adminRouter);
 app.use('/', userRouter);
 app.use('/', blogRouter)
 
+// ! Root Route
+app.get('/', (req, res) => {
+    res.send("This is NewsBlogger project");
+});
 //!Mongoose connection  
 const database_Url = process.env.DATABASE_URL;
 const dbName = 'newzBloggerApp';

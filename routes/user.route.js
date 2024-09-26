@@ -28,6 +28,8 @@ userRouter.get('/logout', adminLoginAuth.isLogin, userController.logout);
 
 userRouter.get('/profile', userController.profile);
 
+userRouter.get('/forget-password', adminLoginAuth.isLogin, userController.forgetLoad);
+
 
 
 module.exports = userRouter
