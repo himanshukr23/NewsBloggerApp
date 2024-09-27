@@ -30,6 +30,10 @@ userRouter.get('/profile', userController.profile);
 
 userRouter.get('/forget-password', adminLoginAuth.isLogin, userController.forgetLoad);
 
+userRouter.post('/forget-password', userController.forgetPasswordVerify);
 
+userRouter.get('/reset-password', adminLoginAuth.isLogout, userController.resetPasswordLoad);
 
-module.exports = userRouter
+userRouter.post('/reset-password', userController.resetPassword);
+
+module.exports = userRouter;
