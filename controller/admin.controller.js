@@ -107,4 +107,5 @@ module.exports = {
     dashboard,
     loadPostDashboard,
     addPost,
+    securePassword,
 }
